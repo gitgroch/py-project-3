@@ -24,7 +24,7 @@ def validate(guess: str, wordlen: int, wordlist: typing.Set[str]) -> typing.Tupl
 def get_player_guess(wordlen: int, worlist: typing.Set[str]) -> str:
     """
     Ask player for word guess,
-    function takes the length of the expected guess (int) and list of avaiilable game words (str).
+    function takes the length of the expected guess (int) and list of available game words (str).
     it will return type string (player guess). 
     Call validate function that will evaluate if the guess is in the right format,
     if not print an error and ask to re-enter a guess,
@@ -40,8 +40,38 @@ def get_player_guess(wordlen: int, worlist: typing.Set[str]) -> str:
         if error is None:
             break
         print(error)
-    
     return guess
+
+def compare(expected: str, guess: str) -> typing.List[str]:
+    """ 
+    Compare the guess with the expected wird and return the output parse. 
+    Takes in game word (expected) and guess word variable (guess)
+    """
+    # declare variable output, default state is incorrect so "_" should be displayed at each index
+    output = ["_"] * len(expected)
+    # iterate through expexted and guess, 
+    # pair variable expected and variable guess using zip,  
+    # keep count of iterations with enumerate,
+    for index, (expected_char, guess_char) in enumerate(zip(expected, guess)):
+        # if expected_char and guess_char match in the right index, add the ouput of "*" at that index 
+        if expected_char == guess_char: 
+            output[index] = "*"
+    # return the list of parses        
+    return output
+
+def find_all_char_positions(word: str, char: str) -> typing.List[int]:
+    """
+    Given a word and a charcter, 
+    find all the indices of that character.
+    """
+    positions = []
+    pos = word.find(char)
+    while pos != -1:
+        positions.append(pos)
+        pos = word.find(char, pos + 1)
+    
+    return positions
+
 
 # Identify module as main
 # setting up main game loop and end game conditions
