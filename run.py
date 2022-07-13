@@ -61,15 +61,19 @@ def compare(expected: str, guess: str) -> typing.List[str]:
 
 def find_all_char_positions(word: str, char: str) -> typing.List[int]:
     """
-    Given a word and a charcter, 
-    find all the indices of that character.
+    Find all indices of a character in a given word.
     """
+    # declare position as an empty list 
     positions = []
+    # use find function to find the first index of the charcter in the string
     pos = word.find(char)
+    # loop through the word to find all positions in the word 
     while pos != -1:
+        # add pos to position list
         positions.append(pos)
+        # move on to the next position
         pos = word.find(char, pos + 1)
-    
+    #return a sorted list of positions 
     return positions
 
 
